@@ -17,13 +17,13 @@ export default function TrustBlock() {
   return (
     <div className="mx-auto mt-16 max-w-3xl">
       <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-center sm:justify-center sm:gap-4 sm:text-left">
-        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-line">
+        <div className="glass-card flex h-14 w-14 shrink-0 items-center justify-center rounded-xl">
           <Image
-            src={studio.photo}
+            src={studio.logoMark.src}
             alt={studio.name}
-            fill
-            sizes="56px"
-            style={{ objectFit: "cover", objectPosition: studio.objectPosition }}
+            width={studio.logoMark.width}
+            height={studio.logoMark.height}
+            className="h-8 w-auto"
           />
         </div>
         <div>

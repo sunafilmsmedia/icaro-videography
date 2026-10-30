@@ -28,8 +28,10 @@ export const BRAND = {
     name: "Keystone Production",
     title: "studio vidéo événementiel",
     region: "ta région",
-    photo: "/studio-mark.svg",
-    objectPosition: "50% 20%",
+    /** Logo complet (monogramme + nom), fond transparent — pour fond sombre. */
+    logoFull: { src: "/keystone-logo-full.png", width: 1080, height: 232 },
+    /** Monogramme seul (recadré du logo complet) — pour les petits formats. */
+    logoMark: { src: "/keystone-logo-mark.png", width: 240, height: 232 },
     phoneDisplay: "000 000-0000",
     phoneTel: "+10000000000",
     email: "contact@exemple.com",

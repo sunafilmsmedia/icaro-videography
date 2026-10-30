@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import TrustBlock from "@/components/TrustBlock";
+import { BRAND } from "@/lib/brand";
 
 interface HeroProps {
   onStart: () => void;
@@ -16,7 +18,16 @@ export default function Hero({ onStart }: HeroProps) {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="mx-auto max-w-2xl text-center"
       >
-        <p className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-accent sm:text-sm sm:tracking-[0.2em]">
+        <Image
+          src={BRAND.studio.logoFull.src}
+          alt={BRAND.studio.name}
+          width={BRAND.studio.logoFull.width}
+          height={BRAND.studio.logoFull.height}
+          priority
+          className="mx-auto h-9 w-auto sm:h-11"
+        />
+
+        <p className="font-mono mt-8 text-xs font-medium uppercase tracking-[0.15em] text-accent sm:text-sm sm:tracking-[0.2em]">
           Vidéo + photos événementielles
         </p>
 

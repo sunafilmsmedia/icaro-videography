@@ -11,6 +11,9 @@ interface PreRevealFormProps {
   onSubmit: (lead: Lead) => void;
 }
 
+const inputClass =
+  "glass-card rounded-xl px-5 py-3.5 text-ink placeholder:text-muted-soft outline-none transition-colors focus:border-accent";
+
 export default function PreRevealForm({ answers, onSubmit }: PreRevealFormProps) {
   const [firstName, setFirstName] = useState("");
   const [eventName, setEventName] = useState("");
@@ -30,7 +33,7 @@ export default function PreRevealForm({ answers, onSubmit }: PreRevealFormProps)
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="w-full max-w-md"
       >
-        <p className="font-serif-display text-3xl">Ton plan est prêt ✅</p>
+        <p className="font-display text-3xl">Ton plan est prêt ✅</p>
 
         <p className="mt-4 text-muted">
           Pour un événement de{" "}
@@ -40,7 +43,7 @@ export default function PreRevealForm({ answers, onSubmit }: PreRevealFormProps)
           <span className="font-medium text-ink">{deliveryDate}</span>.
         </p>
 
-        <p className="mt-8 text-sm font-medium uppercase tracking-[0.15em] text-muted">
+        <p className="font-mono mt-8 text-sm font-medium uppercase tracking-[0.15em] text-accent">
           Où on t&apos;envoie ton plan ?
         </p>
 
@@ -58,14 +61,14 @@ export default function PreRevealForm({ answers, onSubmit }: PreRevealFormProps)
             placeholder="Prénom"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="rounded-xl border border-line px-5 py-3.5 outline-none transition-colors focus:border-ink"
+            className={inputClass}
           />
           <input
             type="text"
             placeholder="Nom de l'entreprise ou de l'événement"
             value={eventName}
             onChange={(e) => setEventName(e.target.value)}
-            className="rounded-xl border border-line px-5 py-3.5 outline-none transition-colors focus:border-ink"
+            className={inputClass}
           />
           <input
             type="email"
@@ -73,7 +76,7 @@ export default function PreRevealForm({ answers, onSubmit }: PreRevealFormProps)
             placeholder="Courriel"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-xl border border-line px-5 py-3.5 outline-none transition-colors focus:border-ink"
+            className={inputClass}
           />
           <input
             type="tel"
@@ -81,13 +84,13 @@ export default function PreRevealForm({ answers, onSubmit }: PreRevealFormProps)
             placeholder="Cellulaire"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="rounded-xl border border-line px-5 py-3.5 outline-none transition-colors focus:border-ink"
+            className={inputClass}
           />
 
           <button
             type="submit"
             disabled={!canSubmit}
-            className="mt-2 w-full rounded-full bg-ink px-6 py-4 text-base font-medium text-white transition-opacity disabled:opacity-20"
+            className="mt-2 w-full rounded-full bg-ink px-6 py-4 text-base font-medium text-ink-contrast transition-opacity disabled:opacity-20"
           >
             Voir mon plan →
           </button>

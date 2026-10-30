@@ -16,11 +16,11 @@ export default function Hero({ onStart }: HeroProps) {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="mx-auto max-w-2xl text-center"
       >
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted">
+        <p className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-accent sm:text-sm sm:tracking-[0.2em]">
           Vidéo + photos événementielles
         </p>
 
-        <h1 className="font-serif-display mt-6 text-4xl leading-[1.08] sm:text-6xl">
+        <h1 className="font-display mt-6 text-4xl leading-[1.08] sm:text-6xl">
           Ta vidéo et tes photos livrées en 7 jours.
           <br />
           <span className="italic">Sinon, on te rembourse.</span>
@@ -33,13 +33,13 @@ export default function Hero({ onStart }: HeroProps) {
 
         <button
           onClick={onStart}
-          className="mt-9 inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-base font-medium text-white transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
+          className="mt-9 inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-base font-medium text-ink-contrast transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
         >
           Voir mon plan
           <span aria-hidden>→</span>
         </button>
 
-        <p className="mt-4 text-sm text-muted-soft">
+        <p className="font-mono mt-4 text-xs text-muted-soft sm:text-sm">
           30 secondes · Gratuit · Sans engagement
         </p>
       </motion.div>

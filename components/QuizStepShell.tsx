@@ -47,7 +47,7 @@ export default function QuizStepShell({
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="mt-12"
         >
-          <h2 className="font-serif-display text-3xl leading-tight sm:text-4xl">
+          <h2 className="font-display text-3xl leading-tight sm:text-4xl">
             {title}
           </h2>
           {subtitle && <p className="mt-3 text-muted">{subtitle}</p>}

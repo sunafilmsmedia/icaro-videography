@@ -45,25 +45,25 @@ export default function Calendar({ selectedIso, onSelect }: CalendarProps) {
   const isPrevDisabled = viewYear === today.getFullYear() && viewMonth === today.getMonth();
 
   return (
-    <div className="rounded-2xl border border-line p-5 sm:p-6">
+    <div className="glass-card rounded-2xl p-5 sm:p-6">
       <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={goToPrevMonth}
           disabled={isPrevDisabled}
           aria-label="Mois précédent"
-          className="rounded-full p-2 text-muted transition-colors hover:bg-surface hover:text-ink disabled:opacity-20 disabled:hover:bg-transparent"
+          className="rounded-full p-2 text-muted transition-colors hover:bg-surface-hover hover:text-ink disabled:opacity-20 disabled:hover:bg-transparent"
         >
           ←
         </button>
-        <p className="font-medium">
+        <p className="font-medium text-ink">
           {MONTH_NAMES[viewMonth]} {viewYear}
         </p>
         <button
           type="button"
           onClick={goToNextMonth}
           aria-label="Mois suivant"
-          className="rounded-full p-2 text-muted transition-colors hover:bg-surface hover:text-ink"
+          className="rounded-full p-2 text-muted transition-colors hover:bg-surface-hover hover:text-ink"
         >
           →
         </button>
@@ -92,12 +92,12 @@ export default function Calendar({ selectedIso, onSelect }: CalendarProps) {
               aria-current={isToday ? "date" : undefined}
               className={`aspect-square rounded-full text-sm transition-colors ${
                 isSelected
-                  ? "bg-ink font-medium text-white"
+                  ? "bg-accent font-medium text-ink-contrast"
                   : disabled
                   ? "text-line cursor-not-allowed"
                   : isToday
-                  ? "border border-ink font-medium text-ink hover:bg-surface"
-                  : "text-ink hover:bg-surface"
+                  ? "border border-accent font-medium text-ink hover:bg-surface-hover"
+                  : "text-ink hover:bg-surface-hover"
               }`}
             >
               {date.getDate()}

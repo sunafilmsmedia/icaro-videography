@@ -8,6 +8,7 @@ import PreRevealForm from "@/components/PreRevealForm";
 import DateStep from "@/components/steps/DateStep";
 import GuestCountStep from "@/components/steps/GuestCountStep";
 import EventTypeStep from "@/components/steps/EventTypeStep";
+import SponsorsStep from "@/components/steps/SponsorsStep";
 import ResultsScreen from "@/components/results/ResultsScreen";
 import { trackLeadWithMatching, trackPixel } from "@/components/MetaPixel";
 import { trackStep } from "@/lib/track";
@@ -65,7 +66,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-ink">
+    <main className="min-h-screen text-ink">
       <AnimatePresence mode="wait">
         {stage === "hero" && (
           <motion.div key="hero" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
@@ -111,13 +112,26 @@ export default function Home() {
               onSelect={(type) => {
                 trackStep("type_evenement", type);
                 setAnswers((a) => ({ ...a, eventType: type }));
-                goToLoading();
+                setStage("sponsors");
               }}
               onSkip={() => {
                 trackStep("type_evenement", "passe");
-                goToLoading();
+                setStage("sponsors");
               }}
               onBack={() => setStage("guests")}
+            />
+          </motion.div>
+        )}
+
+        {stage === "sponsors" && (
+          <motion.div key="sponsors" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+            <SponsorsStep
+              onSelect={(hasSponsors) => {
+                trackStep("sponsors", hasSponsors ? "oui" : "non");
+                setAnswers((a) => ({ ...a, hasSponsors }));
+                goToLoading();
+              }}
+              onBack={() => setStage("eventType")}
             />
           </motion.div>
         )}
@@ -128,17 +142,24 @@ export default function Home() {
           </motion.div>
         )}
 
-        {stage === "preReveal" && answers.eventDate && answers.guestTier && (
-          <motion.div key="preReveal" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-            <PreRevealForm answers={answers as Answers} onSubmit={handleLeadSubmit} />
-          </motion.div>
-        )}
+        {stage === "preReveal" &&
+          answers.eventDate &&
+          answers.guestTier &&
+          typeof answers.hasSponsors === "boolean" && (
+            <motion.div key="preReveal" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+              <PreRevealForm answers={answers as Answers} onSubmit={handleLeadSubmit} />
+            </motion.div>
+          )}
 
-        {stage === "results" && answers.eventDate && answers.guestTier && lead && (
-          <motion.div key="results" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-            <ResultsScreen answers={answers as Answers} onRestart={restart} />
-          </motion.div>
-        )}
+        {stage === "results" &&
+          answers.eventDate &&
+          answers.guestTier &&
+          typeof answers.hasSponsors === "boolean" &&
+          lead && (
+            <motion.div key="results" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+              <ResultsScreen answers={answers as Answers} onRestart={restart} />
+            </motion.div>
+          )}
       </AnimatePresence>
     </main>
   );

@@ -20,7 +20,7 @@ export default function DateStep({ value, onContinue, onBack }: DateStepProps) {
   return (
     <QuizStepShell
       step={1}
-      total={3}
+      total={4}
       title="Quand a lieu ton événement ?"
       subtitle="On calcule ta date de livraison garantie."
       onBack={onBack}
@@ -34,10 +34,10 @@ export default function DateStep({ value, onContinue, onBack }: DateStepProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
-            className="mt-5 rounded-xl border border-line bg-surface px-5 py-4 text-center"
+            className="glass-card mt-5 rounded-xl px-5 py-4 text-center"
           >
-            <p className="text-sm text-muted">Livraison garantie au plus tard le</p>
-            <p className="mt-1 font-medium">📅 {deliveryDate}</p>
+            <p className="font-mono text-sm text-accent">Livraison garantie au plus tard le</p>
+            <p className="mt-1 font-medium text-ink">📅 {deliveryDate}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -46,7 +46,7 @@ export default function DateStep({ value, onContinue, onBack }: DateStepProps) {
         type="button"
         disabled={!selected}
         onClick={() => selected && onContinue(selected)}
-        className="mt-7 w-full rounded-full bg-ink px-6 py-4 text-base font-medium text-white transition-opacity disabled:opacity-20"
+        className="mt-7 w-full rounded-full bg-ink px-6 py-4 text-base font-medium text-ink-contrast transition-opacity disabled:opacity-20"
       >
         Continuer →
       </button>

@@ -22,7 +22,7 @@ export default function LoadingScreen() {
   return (
     <section className="flex min-h-screen flex-col items-center justify-center px-6">
       <div className="relative h-12 w-12">
-        <div className="absolute inset-0 animate-spin rounded-full border-2 border-line border-t-ink" />
+        <div className="absolute inset-0 animate-spin rounded-full border-2 border-line border-t-accent" />
       </div>
       <AnimatePresence mode="wait">
         <motion.p

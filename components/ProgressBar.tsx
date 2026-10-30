@@ -10,7 +10,7 @@ export default function ProgressBar({ step, total }: ProgressBarProps) {
         <div
           key={i}
           className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
-            i < step ? "bg-ink" : "bg-line"
+            i < step ? "bg-accent" : "bg-line"
           }`}
         />
       ))}

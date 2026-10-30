@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────────────────
 //  CONFIG DE MARQUE — WHITE LABEL
-//  Le SEUL fichier à éditer pour rebrander l'app à un nouveau vidéaste.
+//  Le SEUL fichier à éditer pour rebrander l'app à un nouveau studio.
 //  (+ les images dans /public, + les variables d'environnement pour les
 //   intégrations : voir .env.local.example)
 //
-//  Palette : noir sur blanc. Les couleurs se règlent dans app/globals.css.
+//  Thème sombre (dégradé noir → vert sauge, voir app/globals.css).
 // ─────────────────────────────────────────────────────────────────────────
 
 export interface VideoSample {
@@ -22,13 +22,13 @@ export interface ReviewConfig {
 }
 
 export const BRAND = {
-  slug: "icaro-videography",
+  slug: "keystone-production",
 
-  videographer: {
-    name: "Icaro",
-    title: "vidéaste événementiel",
+  studio: {
+    name: "Keystone Production",
+    title: "studio vidéo événementiel",
     region: "ta région",
-    photo: "/videographer.svg",
+    photo: "/studio-mark.svg",
     objectPosition: "50% 20%",
     phoneDisplay: "000 000-0000",
     phoneTel: "+10000000000",

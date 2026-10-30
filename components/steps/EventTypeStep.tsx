@@ -14,14 +14,14 @@ export default function EventTypeStep({ onSelect, onSkip, onBack }: EventTypeSte
   return (
     <QuizStepShell
       step={3}
-      total={3}
+      total={4}
       title="C'est quel genre d'événement ?"
       onBack={onBack}
       skipHint={
         <button
           type="button"
           onClick={onSkip}
-          className="w-full text-center text-sm text-muted underline-offset-4 hover:text-ink hover:underline"
+          className="font-mono w-full text-center text-sm text-muted underline-offset-4 hover:text-ink hover:underline"
         >
           Passer cette question
         </button>
@@ -33,7 +33,7 @@ export default function EventTypeStep({ onSelect, onSkip, onBack }: EventTypeSte
             key={option.value}
             type="button"
             onClick={() => onSelect(option.value)}
-            className="rounded-xl border border-line px-6 py-5 text-left text-lg font-medium transition-colors hover:border-ink hover:bg-surface"
+            className="glass-card rounded-xl px-6 py-5 text-left text-lg font-medium text-ink transition-colors hover:border-accent hover:bg-surface-hover"
           >
             {option.label}
           </button>

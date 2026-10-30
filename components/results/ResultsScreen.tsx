@@ -21,36 +21,49 @@ function fadeUp(delay: number) {
 }
 
 export default function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
-  const plan = getPlan(answers.guestTier);
+  const plan = getPlan(answers.guestTier, answers.hasSponsors);
   const eventDate = formatShortDate(parseIsoDate(answers.eventDate));
   const deliveryDate = formatLongDate(addDays(answers.eventDate, 7));
+
+  const isRange = plan.videoMin !== plan.videoMax;
+  const videoHeadline = isRange
+    ? `Entre ${plan.videoMin} et ${plan.videoMax} vidéos`
+    : `${plan.videoMin} vidéo`;
+  const videoDetail = isRange
+    ? `1 vidéo récap de ${plan.recapDuration} + une vidéo dédiée par sponsor mis en valeur`
+    : `Vidéo récap de ${plan.recapDuration}`;
 
   return (
     <section className="px-6 py-16">
       <div className="mx-auto max-w-xl">
-        <motion.p {...fadeUp(0)} className="font-serif-display text-3xl sm:text-4xl">
+        <motion.p {...fadeUp(0)} className="font-display text-3xl text-ink sm:text-4xl">
           Ton plan pour ton événement du {eventDate}
         </motion.p>
 
         <motion.div {...fadeUp(0.1)} className="mt-8 flex flex-col gap-4">
-          <div className="rounded-2xl border border-line p-6">
-            <p className="text-lg font-medium">🎬 {plan.videoCount} vidéos</p>
-            <p className="mt-1 text-muted">
-              1 vidéo récap de {plan.recapDuration} · {plan.reelsCount} Reels verticaux
-              prêts pour les réseaux
+          <div className="glass-card rounded-2xl p-6">
+            <p className="text-lg font-bold uppercase tracking-wide text-ink">
+              🎬 {videoHeadline}
+            </p>
+            <p className="mt-1 text-muted">{videoDetail}</p>
+          </div>
+
+          <div className="glass-card rounded-2xl p-6">
+            <p className="text-lg font-bold uppercase tracking-wide text-ink">
+              📸 {plan.photoCountLabel} photos retouchées
             </p>
           </div>
 
-          <div className="rounded-2xl border border-line p-6">
-            <p className="text-lg font-medium">📸 {plan.photoCountLabel} photos retouchées</p>
+          <div className="glass-card rounded-2xl p-6">
+            <p className="text-lg font-bold uppercase tracking-wide text-ink">
+              📅 Livré au plus tard le {deliveryDate}
+            </p>
           </div>
 
-          <div className="rounded-2xl border border-line p-6">
-            <p className="text-lg font-medium">📅 Livré au plus tard le {deliveryDate}</p>
-          </div>
-
-          <div className="rounded-2xl bg-ink p-6 text-white">
-            <p className="text-lg font-medium">🛡️ Garanti en 7 jours ou remboursé</p>
+          <div className="rounded-2xl bg-accent p-6 text-ink-contrast">
+            <p className="text-lg font-bold uppercase tracking-wide">
+              🛡️ Garanti en 7 jours ou remboursé
+            </p>
           </div>
         </motion.div>
 
@@ -61,7 +74,7 @@ export default function ResultsScreen({ answers, onRestart }: ResultsScreenProps
         <motion.div {...fadeUp(0.3)} className="mt-10 text-center">
           <a
             href={BRAND.bookingUrl}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-8 py-4 text-base font-medium text-white transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-8 py-4 text-base font-medium text-ink-contrast transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
           >
             Réserver mon plan →
           </a>
@@ -70,7 +83,7 @@ export default function ResultsScreen({ answers, onRestart }: ResultsScreenProps
           </p>
         </motion.div>
 
-        <motion.p {...fadeUp(0.4)} className="mt-10 text-center text-xs text-muted-soft">
+        <motion.p {...fadeUp(0.4)} className="font-mono mt-10 text-center text-xs text-muted-soft">
           Livraison en 7 jours de calendrier après l&apos;événement. Les révisions demandées
           après la livraison ne sont pas incluses dans le délai.
         </motion.p>

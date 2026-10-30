@@ -11,6 +11,7 @@ export interface Answers {
   eventDate: string; // ISO "yyyy-mm-dd"
   guestTier: GuestTier;
   eventType?: EventType;
+  hasSponsors: boolean;
 }
 
 export interface Lead {
@@ -22,11 +23,12 @@ export interface Lead {
 
 export interface PlanResult {
   guestTier: GuestTier;
-  videoCount: number;
+  /** 1 vidéo par défaut ; entre 2 et 4 si plusieurs sponsors (videoMin !== videoMax). */
+  videoMin: number;
+  videoMax: number;
   recapDuration: string; // ex. "60 s"
-  reelsCount: number;
   photoCount: number;
-  photoCountLabel: string; // ex. "300+"
+  photoCountLabel: string; // ex. "360+"
 }
 
 export type Stage =
@@ -34,6 +36,7 @@ export type Stage =
   | "date"
   | "guests"
   | "eventType"
+  | "sponsors"
   | "loading"
   | "preReveal"
   | "results";

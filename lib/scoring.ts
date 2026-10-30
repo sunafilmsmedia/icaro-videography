@@ -15,43 +15,36 @@ export const EVENT_TYPE_OPTIONS: { value: EventType; label: string }[] = [
   { value: "private", label: "Événement privé" },
 ];
 
-// La grille — à valider avec le vidéaste (voir brief).
-const PLAN_GRID: Record<
-  GuestTier,
-  Omit<PlanResult, "guestTier">
-> = {
-  under50: {
-    videoCount: 3,
-    recapDuration: "60 s",
-    reelsCount: 2,
-    photoCount: 75,
-    photoCountLabel: "75",
-  },
-  "50to150": {
-    videoCount: 4,
-    recapDuration: "60-90 s",
-    reelsCount: 3,
-    photoCount: 150,
-    photoCountLabel: "150",
-  },
-  "150to300": {
-    videoCount: 5,
-    recapDuration: "90 s",
-    reelsCount: 4,
-    photoCount: 225,
-    photoCountLabel: "225",
-  },
-  "300plus": {
-    videoCount: 7,
-    recapDuration: "2 min",
-    reelsCount: 6,
-    photoCount: 300,
-    photoCountLabel: "300+",
-  },
+// Durée du récap selon la taille de l'événement — à valider avec le vidéaste.
+const RECAP_DURATION: Record<GuestTier, string> = {
+  under50: "60 s",
+  "50to150": "60-90 s",
+  "150to300": "90 s",
+  "300plus": "2 min",
 };
 
-export function getPlan(guestTier: GuestTier): PlanResult {
-  return { guestTier, ...PLAN_GRID[guestTier] };
+// Borne haute de la tranche d'invités, utilisée comme base du calcul photo.
+const GUEST_BOUNDARY: Record<GuestTier, number> = {
+  under50: 50,
+  "50to150": 150,
+  "150to300": 300,
+  "300plus": 300,
+};
+
+// Environ 1.2 photo retouchée par invité (ex. 50 invités → 60 photos).
+const PHOTO_PER_GUEST = 1.2;
+
+export function getPlan(guestTier: GuestTier, hasSponsors: boolean): PlanResult {
+  const photoCount = Math.round(GUEST_BOUNDARY[guestTier] * PHOTO_PER_GUEST);
+
+  return {
+    guestTier,
+    videoMin: hasSponsors ? 2 : 1,
+    videoMax: hasSponsors ? 4 : 1,
+    recapDuration: RECAP_DURATION[guestTier],
+    photoCount,
+    photoCountLabel: guestTier === "300plus" ? `${photoCount}+` : `${photoCount}`,
+  };
 }
 
 export function guestTierLabel(guestTier: GuestTier): string {

@@ -5,32 +5,32 @@ function Stars({ rating }: { rating: number }) {
   const full = Math.round(rating);
   return (
     <span aria-hidden className="text-sm tracking-tight">
-      {"★★★★★".slice(0, full)}
+      <span className="text-accent">{"★★★★★".slice(0, full)}</span>
       <span className="text-muted-soft">{"★★★★★".slice(full)}</span>
     </span>
   );
 }
 
 export default function TrustBlock() {
-  const { videographer, reviews, videoSamples, pastEventLogos } = BRAND;
+  const { studio, reviews, videoSamples, pastEventLogos } = BRAND;
 
   return (
     <div className="mx-auto mt-16 max-w-3xl">
       <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-center sm:justify-center sm:gap-4 sm:text-left">
         <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-line">
           <Image
-            src={videographer.photo}
-            alt={videographer.name}
+            src={studio.photo}
+            alt={studio.name}
             fill
             sizes="56px"
-            style={{ objectFit: "cover", objectPosition: videographer.objectPosition }}
+            style={{ objectFit: "cover", objectPosition: studio.objectPosition }}
           />
         </div>
         <div>
           <p className="text-sm font-medium text-ink">
-            {videographer.name}, {videographer.title}
+            {studio.name}, {studio.title}
           </p>
-          <p className="text-sm text-muted">{videographer.region}</p>
+          <p className="text-sm text-muted">{studio.region}</p>
         </div>
         <span className="hidden h-8 w-px bg-line sm:block" aria-hidden />
         <a

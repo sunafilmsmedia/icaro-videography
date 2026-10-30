@@ -13,7 +13,7 @@ export default function GuestCountStep({ onSelect, onBack }: GuestCountStepProps
   return (
     <QuizStepShell
       step={2}
-      total={3}
+      total={4}
       title="Combien d'invités attends-tu ?"
       subtitle="Ça nous dit combien de moments il faut capter."
       onBack={onBack}
@@ -24,7 +24,7 @@ export default function GuestCountStep({ onSelect, onBack }: GuestCountStepProps
             key={option.value}
             type="button"
             onClick={() => onSelect(option.value)}
-            className="rounded-xl border border-line px-6 py-6 text-left text-lg font-medium transition-colors hover:border-ink hover:bg-surface"
+            className="glass-card rounded-xl px-6 py-6 text-left text-lg font-medium text-ink transition-colors hover:border-accent hover:bg-surface-hover"
           >
             {option.label}
           </button>

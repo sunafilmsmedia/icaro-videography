@@ -1,29 +1,31 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { JetBrains_Mono, Montserrat } from "next/font/google";
 import MetaPixel from "@/components/MetaPixel";
 import Clarity from "@/components/Clarity";
 import { BRAND } from "@/lib/brand";
 import "./globals.css";
 
-// Corps de texte / UI.
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-// Titres / display — utilisé par les classes `font-serif`.
-const instrumentSerif = Instrument_Serif({
+// Titres / questions — utilisé par la classe `font-display`.
+// Le corps (Helvetica) est un stack système, pas besoin de next/font.
+const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-serif",
   display: "swap",
-  weight: ["400"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
+// Substitut libre de CoFo Sans Mono VF (police de marque payante, non disponible
+// ici) — utilisé pour les étiquettes/mentions courtes façon fiche de marque.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = {
-  title: "Ta vidéo et tes photos livrées en 7 jours",
+  title: "Ta vidéo et tes photos livrées en 7 jours — Keystone Production",
   description:
     "Réponds à 2 questions et découvre exactement ce que tu vas recevoir pour ton événement — vidéo et photos livrées en 7 jours, garanti.",
   metadataBase: new URL(
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
   ),
   openGraph: {
     title: "Ta vidéo et tes photos livrées en 7 jours. Sinon, on te rembourse.",
-    description: `${BRAND.videographer.title} · ${BRAND.videographer.region}`,
+    description: `${BRAND.studio.name} — ${BRAND.studio.title} · ${BRAND.studio.region}`,
     locale: "fr_CA",
   },
 };
@@ -40,8 +42,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr-CA" className={`${inter.variable} ${instrumentSerif.variable}`}>
-      <body className="min-h-screen antialiased bg-white text-black">
+    <html lang="fr-CA" className={`${montserrat.variable} ${jetbrainsMono.variable}`}>
+      <body className="min-h-screen antialiased">
         <MetaPixel />
         <Clarity />
         {children}

@@ -13,7 +13,7 @@ export default function ProofBlock({ eventType }: ProofBlockProps) {
 
   return (
     <div className="mt-10">
-      <p className="text-sm text-muted">
+      <p className="font-mono text-sm text-muted">
         Voici ce que d&apos;autres organisateurs ont reçu en 7 jours.
       </p>
       <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">

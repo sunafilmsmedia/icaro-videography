@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Icaro Videography — quiz de qualification
 
-## Getting Started
+Logiciel de capture de leads en 7 écrans : date de l'événement → nombre
+d'invités → type d'événement (optionnel) → chargement → formulaire → plan
+livré (vidéos + photos, date de livraison garantie, garantie 7 jours ou
+remboursé).
 
-First, run the development server:
+Fond blanc, texte noir, Instrument Serif (titres) + Inter (corps).
+
+## Démarrer
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Fichier à éditer pour rebrander
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`lib/brand.ts` — nom/titre/région/téléphone du vidéaste, photo, avis Google,
+lien de réservation, extraits vidéo (génériques + par type d'événement),
+logos d'événements passés.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+La grille vidéos/photos par tranche d'invités est dans `lib/scoring.ts`
+(`PLAN_GRID`), à valider avec le vidéaste.
 
-## Learn More
+## Placeholders à remplacer avant mise en ligne
 
-To learn more about Next.js, take a look at the following resources:
+- `public/videographer.svg` — photo du vidéaste (silhouette générique).
+- `public/sample-*.svg` — vignettes d'extraits vidéo (génériques, par type
+  d'événement). Les liens `url: "#"` dans `lib/brand.ts` doivent pointer
+  vers de vrais extraits (YouTube/Vimeo/Instagram).
+- `lib/brand.ts` → `videographer` (nom réel, région, téléphone, courriel),
+  `reviews` (vrai lien Google), `bookingUrl` (Calendly ou équivalent).
+- `pastEventLogos` est vide → bloc masqué tant qu'aucun logo n'est fourni.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Intégrations (variables d'environnement)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `NEXT_PUBLIC_META_PIXEL_ID` — Pixel Meta (vide par défaut).
+- `NEXT_PUBLIC_CLARITY_ID` — Microsoft Clarity (vide par défaut).
+- `CRM_WEBHOOK_URL` — si défini, chaque lead complété (`app/api/lead/route.ts`)
+  y est aussi envoyé en POST JSON `{ lead, answers }`. Sinon, le lead est
+  seulement loggué côté serveur.
 
-## Deploy on Vercel
+## Déploiement
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Projet Next.js standard, déployable sur Vercel (`npx vercel --prod`) une fois
+les placeholders ci-dessus remplacés.

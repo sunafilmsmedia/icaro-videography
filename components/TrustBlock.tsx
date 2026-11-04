@@ -12,7 +12,7 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export default function TrustBlock() {
-  const { studio, reviews, videoSamples, pastEventLogos } = BRAND;
+  const { studio, reviews, pastEventLogos } = BRAND;
 
   return (
     <div className="mx-auto mt-16 max-w-3xl">
@@ -42,24 +42,6 @@ export default function TrustBlock() {
             {reviews.rating.toFixed(1)} · {reviews.count} avis Google
           </span>
         </a>
-      </div>
-
-      <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-4">
-        {videoSamples.map((sample) => (
-          <a
-            key={sample.label}
-            href={sample.url}
-            className="group relative aspect-video overflow-hidden rounded-lg border border-line"
-          >
-            <Image
-              src={sample.thumbnail}
-              alt={`Extrait vidéo — ${sample.label}`}
-              fill
-              sizes="200px"
-              className="transition-transform duration-500 group-hover:scale-105"
-            />
-          </a>
-        ))}
       </div>
 
       {pastEventLogos.length > 0 && (

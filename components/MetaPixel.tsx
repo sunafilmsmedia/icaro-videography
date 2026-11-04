@@ -59,17 +59,45 @@ export interface AdvancedMatchingInfo {
   firstName?: string;
 }
 
+// Envoie UN seul Lead navigateur, avec correspondance avancée et un eventID
+// partagé avec l'API Conversions (/api/lead) pour la déduplication.
 export function trackLeadWithMatching(
   user: AdvancedMatchingInfo,
+  eventId: string,
   eventParams?: Record<string, unknown>
 ) {
-  if (typeof window === "undefined" || !window.fbq) return;
+  if (typeof window === "undefined" || !window.fbq || !PIXEL_ID) return;
 
   const userData: Record<string, string> = {};
   if (user.email) userData.em = user.email.trim().toLowerCase();
-  if (user.phone) userData.ph = user.phone.replace(/\D/g, "");
+  if (user.phone) {
+    const digits = user.phone.replace(/\D/g, "");
+    userData.ph = digits.length === 10 ? "1" + digits : digits;
+  }
   if (user.firstName) userData.fn = user.firstName.trim().toLowerCase();
 
   window.fbq("init", PIXEL_ID, userData);
-  window.fbq("track", "Lead", eventParams);
+  window.fbq("track", "Lead", eventParams ?? {}, { eventID: eventId });
+}
+
+// Cookies Meta (_fbp / _fbc) pour améliorer la correspondance côté serveur.
+export function getMetaCookies(): { fbp?: string; fbc?: string } {
+  if (typeof document === "undefined") return {};
+  const read = (name: string) =>
+    document.cookie
+      .split("; ")
+      .find((c) => c.startsWith(name + "="))
+      ?.split("=")[1];
+  let fbc = read("_fbc");
+  if (!fbc) {
+    const fbclid = new URLSearchParams(window.location.search).get("fbclid");
+    if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
+  }
+  return { fbp: read("_fbp"), fbc };
+}
+
+export function newEventId(): string {
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }

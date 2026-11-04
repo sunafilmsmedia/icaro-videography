@@ -10,7 +10,7 @@ import GuestCountStep from "@/components/steps/GuestCountStep";
 import EventTypeStep from "@/components/steps/EventTypeStep";
 import SponsorsStep from "@/components/steps/SponsorsStep";
 import ResultsScreen from "@/components/results/ResultsScreen";
-import { trackLeadWithMatching, trackPixel } from "@/components/MetaPixel";
+import { getMetaCookies, newEventId, trackLeadWithMatching } from "@/components/MetaPixel";
 import { trackStep } from "@/lib/track";
 import type { Answers, Lead, Stage } from "@/lib/types";
 
@@ -39,18 +39,26 @@ export default function Home() {
   const handleLeadSubmit = async (newLead: Lead) => {
     setLead(newLead);
     trackStep("pre_reveal_complete");
-    trackPixel("Lead");
-    trackLeadWithMatching({
-      email: newLead.email,
-      phone: newLead.phone,
-      firstName: newLead.firstName,
-    });
+    const eventId = newEventId();
+    trackLeadWithMatching(
+      {
+        email: newLead.email,
+        phone: newLead.phone,
+        firstName: newLead.firstName,
+      },
+      eventId,
+      { content_name: "Quiz vidéo/photo" }
+    );
 
     try {
       await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lead: newLead, answers }),
+        body: JSON.stringify({
+          lead: newLead,
+          answers,
+          meta: { eventId, url: window.location.href, ...getMetaCookies() },
+        }),
       });
     } catch {
       // le lead reste capturé côté client même si l'envoi échoue

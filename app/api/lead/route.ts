@@ -1,5 +1,6 @@
 import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { eventTypeLabel, getPlan, guestTierLabel } from "@/lib/scoring";
 import type { Answers, Lead } from "@/lib/types";
 
 // API Conversions de Meta — Lead côté serveur, dédupliqué avec le Pixel
@@ -78,6 +79,33 @@ async function sendMetaLead(req: NextRequest, lead: Lead, meta: MetaInfo) {
   }
 }
 
+// Champs à plat (faciles à mapper dans le déclencheur webhook GHL) + objets bruts.
+function ghlPayload(lead: Lead, answers: Answers) {
+  const digits = String(lead.phone ?? "").replace(/\D/g, "");
+  const plan = answers?.guestTier
+    ? getPlan(answers.guestTier, Boolean(answers.hasSponsors))
+    : null;
+  return {
+    first_name: lead.firstName?.trim(),
+    email: lead.email?.trim().toLowerCase(),
+    phone: digits.length === 10 ? "+1" + digits : lead.phone,
+    company_name: lead.eventName?.trim() || undefined,
+    event_date: answers?.eventDate,
+    guest_count: answers?.guestTier ? guestTierLabel(answers.guestTier) : undefined,
+    event_type: eventTypeLabel(answers?.eventType) ?? undefined,
+    has_sponsors: answers?.hasSponsors ? "Oui" : "Non",
+    videos: plan
+      ? plan.videoMin === plan.videoMax
+        ? String(plan.videoMin)
+        : `${plan.videoMin} à ${plan.videoMax}`
+      : undefined,
+    photos: plan?.photoCountLabel,
+    source: "Quiz Keystone Production",
+    lead,
+    answers,
+  };
+}
+
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as { lead: Lead; answers: Answers; meta?: MetaInfo };
   const { meta, ...crmBody } = body;
@@ -92,7 +120,7 @@ export async function POST(req: NextRequest) {
       fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(crmBody),
+        body: JSON.stringify(ghlPayload(body.lead, body.answers)),
       }).catch((err) => console.error("[lead] échec envoi CRM", err))
     );
   }

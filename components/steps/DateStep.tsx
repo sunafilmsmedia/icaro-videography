@@ -9,8 +9,10 @@ interface DateStepProps {
 }
 
 const MONTH_OPTIONS = [
-  { label: "Novembre", month: 10 },
-  { label: "Décembre", month: 11 },
+  { label: "Novembre 2026", month: 10 },
+  { label: "Décembre 2026", month: 11 },
+  { label: "Janvier 2027", month: 0 },
+  { label: "Février 2027", month: 1 },
 ];
 
 export default function DateStep({ onContinue, onBack }: DateStepProps) {

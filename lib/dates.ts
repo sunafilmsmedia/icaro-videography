@@ -42,14 +42,17 @@ export function addDays(iso: string, days: number): Date {
   return date;
 }
 
-export function startOfToday(): Date {
+/** ISO du 15e jour du mois choisi (0 = janvier), sur l'année en cours ou la prochaine si le mois est déjà passé. */
+export function monthIsoDate(month: number): string {
   const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  return now;
+  const year = month >= now.getMonth() ? now.getFullYear() : now.getFullYear() + 1;
+  return toIsoDate(new Date(year, month, 15));
 }
 
-export function isPastDay(date: Date): boolean {
-  return date.getTime() < startOfToday().getTime();
+/** ISO du dernier jour du mois d'une date ISO donnée, pour un "au plus tard" valide quel que soit le jour réel. */
+export function endOfMonthIso(iso: string): string {
+  const date = parseIsoDate(iso);
+  return toIsoDate(new Date(date.getFullYear(), date.getMonth() + 1, 0));
 }
 
 /** "vendredi 14 novembre 2026" */
@@ -57,10 +60,7 @@ export function formatLongDate(date: Date): string {
   return `${JOURS[date.getDay()]} ${date.getDate()} ${MOIS[date.getMonth()]} ${date.getFullYear()}`;
 }
 
-/** "14 novembre 2026" */
-export function formatShortDate(date: Date): string {
-  return `${date.getDate()} ${MOIS[date.getMonth()]} ${date.getFullYear()}`;
+/** "novembre 2026" */
+export function formatMonthYear(date: Date): string {
+  return `${MOIS[date.getMonth()]} ${date.getFullYear()}`;
 }
-
-export const MONTH_NAMES = MOIS;
-export const DAY_NAMES_SHORT = ["D", "L", "M", "M", "J", "V", "S"];

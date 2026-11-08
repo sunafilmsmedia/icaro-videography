@@ -90,7 +90,6 @@ export default function Home() {
         {stage === "date" && (
           <motion.div key="date" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
             <DateStep
-              value={answers.eventDate ?? null}
               onContinue={(iso) => {
                 trackStep("date", iso);
                 setAnswers((a) => ({ ...a, eventDate: iso }));

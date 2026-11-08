@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import ProofBlock from "@/components/results/ProofBlock";
 import { BRAND } from "@/lib/brand";
-import { addDays, formatLongDate, formatShortDate, parseIsoDate } from "@/lib/dates";
+import { addDays, endOfMonthIso, formatLongDate, formatMonthYear, parseIsoDate } from "@/lib/dates";
 import { getPlan } from "@/lib/scoring";
 import type { Answers } from "@/lib/types";
 
@@ -22,8 +22,8 @@ function fadeUp(delay: number) {
 
 export default function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
   const plan = getPlan(answers.guestTier, answers.hasSponsors);
-  const eventDate = formatShortDate(parseIsoDate(answers.eventDate));
-  const deliveryDate = formatLongDate(addDays(answers.eventDate, 7));
+  const eventDate = formatMonthYear(parseIsoDate(answers.eventDate));
+  const deliveryDate = formatLongDate(addDays(endOfMonthIso(answers.eventDate), 7));
 
   const isRange = plan.videoMin !== plan.videoMax;
   const videoHeadline = isRange
@@ -37,7 +37,7 @@ export default function ResultsScreen({ answers, onRestart }: ResultsScreenProps
     <section className="px-6 py-16">
       <div className="mx-auto max-w-xl">
         <motion.p {...fadeUp(0)} className="font-display text-3xl text-ink sm:text-4xl">
-          Ton plan pour ton événement du {eventDate}
+          Ton plan pour ton événement en {eventDate}
         </motion.p>
 
         <motion.div {...fadeUp(0.1)} className="mt-8 flex flex-col gap-4">

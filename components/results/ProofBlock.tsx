@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { BRAND } from "@/lib/brand";
 import type { EventType } from "@/lib/types";
 
@@ -21,14 +20,14 @@ export default function ProofBlock({ eventType }: ProofBlockProps) {
           <a
             key={`${sample.label}-${i}`}
             href={sample.url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative aspect-video overflow-hidden rounded-lg border border-line"
           >
-            <Image
+            <img
               src={sample.thumbnail}
               alt={`Extrait vidéo — ${sample.label}`}
-              fill
-              sizes="200px"
-              className="transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </a>
         ))}

@@ -48,9 +48,18 @@ export const BRAND = {
 
   /** Extraits vidéo génériques (hero + preuve sociale sans type d'événement). */
   videoSamples: [
-    { thumbnail: "/sample-gala.svg", url: "#", label: "Gala" },
-    { thumbnail: "/sample-corporate.svg", url: "#", label: "Corporatif" },
-    { thumbnail: "/sample-festival.svg", url: "#", label: "Festival" },
+    {
+      thumbnail:
+        "https://cdn.loom.com/sessions/thumbnails/2add3323e7e34388bc719776577939b7-2abf76ce4cad5c85.gif",
+      url: "https://www.loom.com/share/2add3323e7e34388bc719776577939b7",
+      label: "Une nouvelle génération au bon endroit",
+    },
+    {
+      thumbnail:
+        "https://cdn.loom.com/sessions/thumbnails/3255fe7f348249338c861d1dc490725c-7935558d26a955f8.gif",
+      url: "https://www.loom.com/share/3255fe7f348249338c861d1dc490725c",
+      label: "Opening Night — Grand Opening",
+    },
   ] satisfies VideoSample[],
 
   /** Extraits vidéo par type d'événement — utilisés à l'écran résultat si Q3 répondue. */

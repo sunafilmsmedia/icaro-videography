@@ -32,9 +32,9 @@ export default function Hero({ onStart }: HeroProps) {
         </p>
 
         <h1 className="font-display mt-6 text-4xl leading-[1.08] sm:text-6xl">
-          Ta vidéo et tes photos livrées en 7 jours.
+          Vidéos événementielles remises en 7 jours.
           <br />
-          <span className="italic">Sinon, on te rembourse.</span>
+          <span className="italic">Ou remboursé.</span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-lg text-lg text-muted">

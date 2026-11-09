@@ -25,14 +25,14 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ta vidéo et tes photos livrées en 7 jours — Keystone Production",
+  title: "Vidéos événementielles remises en 7 jours. Ou remboursé — Keystone Production",
   description:
     "Réponds à 2 questions et découvre exactement ce que tu vas recevoir pour ton événement — vidéo et photos livrées en 7 jours, garanti.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://exemple.vercel.app"
   ),
   openGraph: {
-    title: "Ta vidéo et tes photos livrées en 7 jours. Sinon, on te rembourse.",
+    title: "Vidéos événementielles remises en 7 jours. Ou remboursé.",
     description: `${BRAND.studio.name} — ${BRAND.studio.title} · ${BRAND.studio.region}`,
     locale: "fr_CA",
   },

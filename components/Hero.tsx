@@ -32,9 +32,9 @@ export default function Hero({ onStart }: HeroProps) {
         </p>
 
         <h1 className="font-display mt-6 text-4xl leading-[1.08] sm:text-6xl">
-          Vidéos événementielles remises en 7 jours.
+          Ta vidéo recap en 7 jours.
           <br />
-          <span className="italic">Ou remboursé.</span>
+          <span className="italic">Sinon, c&apos;est gratuit.</span>
         </h1>
 
         <p className="mx-auto mt-6 max-w-lg text-lg text-muted">
@@ -46,7 +46,7 @@ export default function Hero({ onStart }: HeroProps) {
           onClick={onStart}
           className="mt-9 inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-base font-medium text-ink-contrast transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
         >
-          Voir mon plan
+          Voir ma soumission
           <span aria-hidden>→</span>
         </button>
 

@@ -37,11 +37,6 @@ export default function Hero({ onStart }: HeroProps) {
           <span className="italic">Sinon, c&apos;est gratuit.</span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-lg text-lg text-muted">
-          Réponds à 2 questions et découvre exactement ce que tu vas recevoir
-          pour ton événement.
-        </p>
-
         <button
           onClick={onStart}
           className="mt-9 inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-base font-medium text-ink-contrast transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
@@ -49,10 +44,6 @@ export default function Hero({ onStart }: HeroProps) {
           Voir ma soumission
           <span aria-hidden>→</span>
         </button>
-
-        <p className="font-mono mt-4 text-xs text-muted-soft sm:text-sm">
-          30 secondes · Gratuit · Sans engagement
-        </p>
       </motion.div>
 
       <motion.div

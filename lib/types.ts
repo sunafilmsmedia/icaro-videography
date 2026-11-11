@@ -32,7 +32,6 @@ export interface PlanResult {
 }
 
 export type Stage =
-  | "hero"
   | "date"
   | "guests"
   | "eventType"

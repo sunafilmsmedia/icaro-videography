@@ -5,7 +5,7 @@ import { monthIsoDate } from "@/lib/dates";
 
 interface DateStepProps {
   onContinue: (iso: string) => void;
-  onBack: () => void;
+  onBack?: () => void;
 }
 
 const MONTH_OPTIONS = [

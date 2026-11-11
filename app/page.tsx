@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Hero from "@/components/Hero";
 import LoadingScreen from "@/components/LoadingScreen";
 import PreRevealForm from "@/components/PreRevealForm";
 import DateStep from "@/components/steps/DateStep";
@@ -17,13 +16,17 @@ import type { Answers, Lead, Stage } from "@/lib/types";
 const LOADING_MS = 2400;
 
 export default function Home() {
-  const [stage, setStage] = useState<Stage>("hero");
+  const [stage, setStage] = useState<Stage>("date");
   const [answers, setAnswers] = useState<Partial<Answers>>({});
   const [lead, setLead] = useState<Lead | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") window.scrollTo(0, 0);
   }, [stage]);
+
+  useEffect(() => {
+    trackStep("debut");
+  }, []);
 
   useEffect(() => {
     if (stage !== "loading") return;
@@ -70,23 +73,12 @@ export default function Home() {
   const restart = () => {
     setAnswers({});
     setLead(null);
-    setStage("hero");
+    setStage("date");
   };
 
   return (
     <main className="min-h-screen text-ink">
       <AnimatePresence mode="wait">
-        {stage === "hero" && (
-          <motion.div key="hero" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-            <Hero
-              onStart={() => {
-                trackStep("debut");
-                setStage("date");
-              }}
-            />
-          </motion.div>
-        )}
-
         {stage === "date" && (
           <motion.div key="date" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
             <DateStep
@@ -95,7 +87,6 @@ export default function Home() {
                 setAnswers((a) => ({ ...a, eventDate: iso }));
                 setStage("guests");
               }}
-              onBack={() => setStage("hero")}
             />
           </motion.div>
         )}

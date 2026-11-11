@@ -34,7 +34,6 @@ export interface PlanResult {
 export type Stage =
   | "date"
   | "guests"
-  | "eventType"
   | "sponsors"
   | "loading"
   | "preReveal"

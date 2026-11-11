@@ -19,7 +19,7 @@ export default function DateStep({ onContinue, onBack }: DateStepProps) {
   return (
     <QuizStepShell
       step={1}
-      total={4}
+      total={3}
       title="Quand a lieu ton événement ?"
       subtitle="On calcule ta date de livraison garantie."
       onBack={onBack}

@@ -6,7 +6,6 @@ import LoadingScreen from "@/components/LoadingScreen";
 import PreRevealForm from "@/components/PreRevealForm";
 import DateStep from "@/components/steps/DateStep";
 import GuestCountStep from "@/components/steps/GuestCountStep";
-import EventTypeStep from "@/components/steps/EventTypeStep";
 import SponsorsStep from "@/components/steps/SponsorsStep";
 import ResultsScreen from "@/components/results/ResultsScreen";
 import { getMetaCookies, newEventId, trackLeadWithMatching } from "@/components/MetaPixel";
@@ -97,26 +96,9 @@ export default function Home() {
               onSelect={(tier) => {
                 trackStep("invites", tier);
                 setAnswers((a) => ({ ...a, guestTier: tier }));
-                setStage("eventType");
+                setStage("sponsors");
               }}
               onBack={() => setStage("date")}
-            />
-          </motion.div>
-        )}
-
-        {stage === "eventType" && (
-          <motion.div key="eventType" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-            <EventTypeStep
-              onSelect={(type) => {
-                trackStep("type_evenement", type);
-                setAnswers((a) => ({ ...a, eventType: type }));
-                setStage("sponsors");
-              }}
-              onSkip={() => {
-                trackStep("type_evenement", "passe");
-                setStage("sponsors");
-              }}
-              onBack={() => setStage("guests")}
             />
           </motion.div>
         )}
@@ -129,7 +111,7 @@ export default function Home() {
                 setAnswers((a) => ({ ...a, hasSponsors }));
                 goToLoading();
               }}
-              onBack={() => setStage("eventType")}
+              onBack={() => setStage("guests")}
             />
           </motion.div>
         )}

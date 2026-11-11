@@ -13,7 +13,7 @@ export default function GuestCountStep({ onSelect, onBack }: GuestCountStepProps
   return (
     <QuizStepShell
       step={2}
-      total={4}
+      total={3}
       title="Combien d'invités attends-tu ?"
       subtitle="Ça nous dit combien de moments il faut capter."
       onBack={onBack}

@@ -10,8 +10,8 @@ interface SponsorsStepProps {
 export default function SponsorsStep({ onSelect, onBack }: SponsorsStepProps) {
   return (
     <QuizStepShell
-      step={4}
-      total={4}
+      step={3}
+      total={3}
       title="Avez-vous plusieurs sponsors ?"
       subtitle="Ça change le nombre de vidéos qu'on te recommande."
       onBack={onBack}

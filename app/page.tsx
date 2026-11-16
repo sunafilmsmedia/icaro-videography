@@ -29,14 +29,9 @@ export default function Home() {
 
   useEffect(() => {
     if (stage !== "loading") return;
-    const timeout = setTimeout(() => setStage("preReveal"), LOADING_MS);
+    const timeout = setTimeout(() => setStage("results"), LOADING_MS);
     return () => clearTimeout(timeout);
   }, [stage]);
-
-  const goToLoading = () => {
-    trackStep("analyse");
-    setStage("loading");
-  };
 
   const handleLeadSubmit = async (newLead: Lead) => {
     setLead(newLead);
@@ -66,7 +61,8 @@ export default function Home() {
       // le lead reste capturé côté client même si l'envoi échoue
     }
 
-    setStage("results");
+    trackStep("analyse");
+    setStage("loading");
   };
 
   const restart = () => {
@@ -109,16 +105,10 @@ export default function Home() {
               onSelect={(hasSponsors) => {
                 trackStep("sponsors", hasSponsors ? "oui" : "non");
                 setAnswers((a) => ({ ...a, hasSponsors }));
-                goToLoading();
+                setStage("preReveal");
               }}
               onBack={() => setStage("guests")}
             />
-          </motion.div>
-        )}
-
-        {stage === "loading" && (
-          <motion.div key="loading" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-            <LoadingScreen />
           </motion.div>
         )}
 
@@ -130,6 +120,12 @@ export default function Home() {
               <PreRevealForm answers={answers as Answers} onSubmit={handleLeadSubmit} />
             </motion.div>
           )}
+
+        {stage === "loading" && (
+          <motion.div key="loading" exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+            <LoadingScreen />
+          </motion.div>
+        )}
 
         {stage === "results" &&
           answers.eventDate &&

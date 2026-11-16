@@ -60,7 +60,7 @@ export default function PreRevealForm({ answers, onSubmit }: PreRevealFormProps)
           <input
             type="text"
             required
-            placeholder="Prénom"
+            placeholder="Nom complet"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             className={inputClass}
